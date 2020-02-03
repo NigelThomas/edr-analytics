@@ -1,0 +1,10 @@
+#Please Do not delete this comment line.
+INCREMENT engine sqlstreamd 6.0 20-feb-2020 uncounted \
+	VENDOR_STRING="name:Ecats911 max-threads:0 \
+	installation-id:null license-check-period:never \
+	usage-check-period:never usage-report-period:never \
+	throttle-when:never" HOSTID=ANY ISSUER="SQLstream Inc." \
+	ISSUED=14-dec-2018 START=13-dec-2018 SIGN="10CB 9A5B 7826 959A \
+	C477 3994 C73E 105C A480 3F39 98C5 82C0 E1BE 499A 6B27 0016 \
+	BD14 603B 3FDB 0CCE 8102 E51F ACD3 C9E2 E51D 99C8 C1E3 BE5C \
+	3CA9 7A97" SIGN2=2D72346E0378
