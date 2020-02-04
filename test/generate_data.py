@@ -4,7 +4,7 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-s","--subscriber_count", type=int, default=1000, help="number of subscribers to be created")
-parser.add_argument("-t","--output_time", type=int, default=1000, help="number of seconds of calls")
+parser.add_argument("-t","--output_time", type=int, default=10000, help="number of seconds of calls")
 parser.add_argument("-r","--call_rate", type=int, default=10, help="max number of calls per second")
 parser.add_argument("-u","--upgrade_prob", type=int, default=5, help="integer pct probability of upgrade")
 
