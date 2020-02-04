@@ -8,7 +8,7 @@ echo `whoami`
 DATADIR=/home/sqlstream/edr-data
 
 mkdir /home/sqlstream/edr-data
-nohup python test/generate_data.py >/home/sqlstream/edr-data/calldata.csv -s $DATADIR/subscribers.csv -e $DATADIR/calldata.csv &  
+nohup python test/generate_data.py -s $DATADIR/subscribers.csv -e $DATADIR/calldata.csv &  
 
 echo ... data generation to file started
 

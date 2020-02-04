@@ -36,7 +36,7 @@ subscriber_imeis = []
 sf = open(args.subscriber_file,"w")
 
 
-sf.write("msisdn, imei,band\n")
+sf.write("msisdn,imei,band\n")
 
 for sub in range(len(subscribers)):
     tac = random.randrange(len(tacs))
@@ -61,7 +61,7 @@ startsecs = time.time()
 
 ef = open(args.edr_file,"w")
 
-ef.write("calltime,msisdn, imei,band,upg_imei\n")
+ef.write("calltime,msisdn,imei,band,upg_imei\n")
 
 for calltime in range(args.output_time):
 
