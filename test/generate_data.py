@@ -3,12 +3,16 @@ import time
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-s","--subscriber_count", type=int, default=1000, help="number of subscribers to be created")
+parser.add_argument("-c","--subscriber_count", type=int, default=1000, help="number of subscribers to be created")
 parser.add_argument("-t","--output_time", type=int, default=10000, help="number of seconds of calls")
 parser.add_argument("-r","--call_rate", type=int, default=10, help="max number of calls per second")
 parser.add_argument("-u","--upgrade_prob", type=int, default=5, help="integer pct probability of upgrade")
 
-parser.add_argument( "-k", "--trickle", default=False, action='store_true', help="Trickle one second of data each second?")
+parser.add_argument( "-k", "--trickle", default=True, action='store_true', help="Trickle one second of data each second")
+parser.add_argument( "-n", "--no_trickle", default=False, dest='trickle', action='store_false', help="No trickling - emit data immediately")
+
+parser.add_argument('-s', '--subscriber_file', default='./subscribers.csv', help='output: initial list of generated subscribers')
+parser.add_argument('-e', '--edr_file', default='./calldata.csv', help='output: generated file of EDRs')
 
 args = parser.parse_args()
 
@@ -27,21 +31,26 @@ subscriber_tacs = []
 subscriber_tacnos = []
 subscriber_imeis = []
 
+# Generate the initial list of subscribers and IMEIs
+
+sf = open(args.subscriber_file,"w")
+
+
+sf.write("msisdn, imei,band\n")
+
 for sub in range(len(subscribers)):
-    subscriber_tacs.append(random.randrange(len(tacs)))
+    tac = random.randrange(len(tacs))
+    subscriber_tacs.append(tac)
     subscriber_tacnos.append(1)
     imei = "%s-%05d-%04d" % (tac_descs[subscriber_tacs[sub]]['code'], sub , subscriber_tacnos[sub])
     subscriber_imeis.append(imei)
+    tac_desc = tac_descs[tac]
+    band = tac_desc['band']
 
-# Initial status
+    sf.write("%010d,%s,%s\n"% (sub, imei, band))
 
-#print subscribers
-#print tacs
-#print tac_descs
-#print subscriber_tacs
+sf.close
 
-#for sub in range(len(subscribers)):
-#    print "Subscriber:"+str(sub) + ", Tac#:"+ str(subscriber_tacs[sub])+ ", Tac:" + str(tac_descs[subscriber_tacs[sub]])
 
 
 # Now generate calls for random TACs every second
@@ -50,7 +59,9 @@ startsecs = time.time()
 
 # Generate data for this many "seconds"
 
-print "calltime,msisdn, imei,band,upg_imei\n"
+ef = open(args.edr_file,"w")
+
+ef.write("calltime,msisdn, imei,band,upg_imei\n")
 
 for calltime in range(args.output_time):
 
@@ -78,11 +89,14 @@ for calltime in range(args.output_time):
         tac_desc = tac_descs[tac]
         band = tac_desc['band']
 
-        print "%010d,%010d,%s,%s,%d"% (calltime+startsecs, sub, imei, band, upgrade_imei)
+        ef.write("%010d,%010d,%s,%s,%d\n"% (calltime+startsecs, sub, imei, band, upgrade_imei))
     
+   
     # If we want to trickle the data:
     if args.trickle:
+        # keep pushing data out
+        ef.flush()
         time.sleep(1)
 
-
+ef.close()
 
