@@ -64,7 +64,11 @@ for sub in range(len(subscribers)):
     tac_desc = tac_descs[tac]
     band = tac_desc['band']
 
-    sf.write("%010d|%s|%s\n"% (sub, imei, band))
+    # has the subscriber previously been given the promotion
+    promoted = random.choice(['Y','N'])
+
+
+    sf.write("%010d|%s|%s|%s\n"% (sub, imei, band, promoted))
 
 sf.close
 
