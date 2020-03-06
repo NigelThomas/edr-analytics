@@ -45,6 +45,6 @@ docker run \
            -e LOAD_SLAB_FILES="${LOAD_SLAB_FILES:=edr*.slab}" \
            -e SQLSTREAM_HEAP_MEMORY=${SQLSTREAM_HEAP_MEMORY:=4096m} \
            -e SQLSTREAM_SLEEP_SECS=${SQLSTREAM_SLEEP_SECS:=10} \
-           -d --name $CONTAINER_NAME -it $BASE_IMAGE
+           -d --name $CONTAINER_NAME -it $BASE_IMAGE:${BASE_IMAGE_LABEL:=release}
 
 docker logs -f $CONTAINER_NAME
