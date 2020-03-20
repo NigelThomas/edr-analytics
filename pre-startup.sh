@@ -12,5 +12,7 @@ nohup python test/generate_data.py -s $DATADIR/subscribers.csv -e $DATADIR/calld
 
 echo ... data generation to file started
 
+# include the standard monitor application
 
+. add_monitor.sh
 
