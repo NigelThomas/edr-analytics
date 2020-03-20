@@ -10,7 +10,7 @@ GIT_PROJECT_NAME=edr-analytics
 # kill any edr test container running on this host (because ports will clash)
 # TODO only kill those that are actually running
 
-for c in edr_dev edr_test
+for c in edr_dev edr_test edr_complete
 do
     docker kill $c
 done
