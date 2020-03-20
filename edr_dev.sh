@@ -7,7 +7,7 @@ BASE_IMAGE=sqlstream/streamlab-git-dev
 BASE_IMAGE_LABEL=release
 CONTAINER_NAME=edr_dev
 
-: ${LOAD_SLAB_FILES:=edr.slab}
+: ${LOAD_SLAB_FILES:=*.slab}
 
 
 . $HERE/dockercommon.sh
